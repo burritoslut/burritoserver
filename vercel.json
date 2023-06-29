@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "/package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "/package.json",
+      "use": "@vercel/static-build",
+      "config": {"distDir": "build"}
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1.js"
+    },
+    {
+      "src": "/(.*).(js|css|map|json)",
+      "headers": {"cache-control": "s-maxage=31536000,immutable"},
+      "dest": "/build/$1.$2"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/build/index.html"
+    }
+  ]
+}
