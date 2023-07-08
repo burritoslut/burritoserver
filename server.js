@@ -266,11 +266,6 @@ app.patch('/burritos/:id/dislike', authenticateToken, async (req, res) => {
 
 // ...
 
-if (process.env.NODE_ENV !== 'production') {
   app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
   });
-} else {
-  module.exports = app;
-}
-
